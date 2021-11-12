@@ -7,6 +7,18 @@ This project contains a script in javascript which initialize a react applicatio
 - Scss
 - Material UI
 
+As prerequisites, you need to install `node`, `npm` and `npx`:
+
+[Here](https://nodejs.org/en/download/) is the `node`installation documentation.
+
+```bash
+npm install -g npm
+```
+
+```bash
+npm install -g npx
+```
+
 Just start the script with node:
 
 ```bash
