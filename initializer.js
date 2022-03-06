@@ -10,7 +10,7 @@ const projectName = process.argv[3];
 async function main() {
   await mkdir(projectDir);
   await createReactApp();
-  // await installExtraDependencies();
+  await installExtraDependencies();
   await renameCssToScssFiles();
   fixScssImports();
 
@@ -35,7 +35,7 @@ async function createReactApp() {
 }
 
 async function installExtraDependencies() {
-  const command = `cd ${projectDir}/${projectName} && npm install --save @types/react && npm install -g sass && npm install --save-dev sass && npm install @material-ui/core @material-ui/icons @types/material-ui`;
+  const command = `cd ${projectDir}/${projectName} && npm install --save @types/react && npm install -g sass && npm install --save-dev sass && npm install  @mui/material @mui/styles`;
   logCommand(command);
   return exec(command).catch(processError);
 }
