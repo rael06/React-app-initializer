@@ -25,6 +25,15 @@ Just start the script with node:
 node initializer.js [path to your directory where you want your project folder] [your project name (uppercases are not allowed)]
 ```
 
+Notes:
+In case of ERR401, be sure to target the right npm registry.
+You can set it creating a `.npmrc` file in the root content of your user.
+You can set it to target the public official npm registry by putting the following line in the `.npmrc` file:
+
+```txt
+registry=https://registry.npmjs.org
+```
+
 Example:
 
 ```bash
