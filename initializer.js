@@ -9,7 +9,9 @@ const projectName = process.argv[3];
 
 async function main() {
   await mkdir(projectDir);
+  await createNpmrc(projectDir);
   await createReactApp();
+  await createNpmrc(`${projectDir}/${projectName}`);
   await installExtraDependencies();
   await renameCssToScssFiles();
   fixScssImports();
@@ -29,13 +31,13 @@ function mkdir(path) {
 }
 
 async function createReactApp() {
-  const command = `cd ${projectDir} && npx create-react-app ${projectName} --template typescript && cd ${projectDir}/${projectName} && npm install --save @types/react && npm install -g sass && npm install --save-dev sass && npm install @material-ui/core @material-ui/icons @types/material-ui`;
+  const command = `cd ${projectDir} && npx create-react-app ${projectName} --template typescript`;
   logCommand(command);
   return exec(command).catch(processError);
 }
 
 async function installExtraDependencies() {
-  const command = `cd ${projectDir}/${projectName} && npm install --save @types/react && npm install -g sass && npm install --save-dev sass && npm install  @mui/material @mui/styles`;
+  const command = `cd ${projectDir}/${projectName} && npm install --save @types/react && npm install -g sass && npm install --save-dev sass && npm install @mui/material @mui/styles && npm install @emotion/react @emotion/styled`;
   logCommand(command);
   return exec(command).catch(processError);
 }
@@ -64,6 +66,16 @@ async function renameCssToScssFiles() {
 function fixScssImports() {
   fixIndexTsx();
   fixAppTsx();
+}
+
+function createNpmrc(path) {
+  console.log("Creating .npmrc file");
+  try {
+    fs.writeFileSync(`${path}/.npmrc`, "registry=https://registry.npmjs.org");
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 }
 
 function fixIndexTsx() {
